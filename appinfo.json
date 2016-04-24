@@ -1,0 +1,20 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "tilian90@yandex.ru",
+    "enableMultiJS": true,
+    "longName": "DRAWING",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "DRAWING",
+    "uuid": "745771b3-1f9e-49bb-aa2f-731882ff95e5",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
