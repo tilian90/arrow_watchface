@@ -8,13 +8,25 @@
     "longName": "DRAWING",
     "projectType": "native",
     "resources": {
-        "media": []
+        "media": [
+            {
+                "file": "images/_batlogo.png",
+                "name": "RESOURCE_ID_BATLOGO",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            }
+        ]
     },
     "sdkVersion": "3",
     "shortName": "DRAWING",
+    "targetPlatforms": [
+        "aplite",
+        "basalt",
+        "chalk"
+    ],
     "uuid": "745771b3-1f9e-49bb-aa2f-731882ff95e5",
     "versionLabel": "1.0",
     "watchapp": {
-        "watchface": false
+        "watchface": true
     }
 }
