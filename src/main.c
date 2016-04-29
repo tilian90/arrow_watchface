@@ -8,8 +8,8 @@ static GPoint s_start, s_end_minute, s_end_hour;
 static BitmapLayer *s_logo_layer;
 static GBitmap *s_logo_bitmap;
 
-static const int RADIUS_MIN = 67;
-static const int RADIUS_HOUR = 57;
+static const int RADIUS_MIN = 47;
+static const int RADIUS_HOUR = 40;
 static const int X_CENTER = 72;
 static const int Y_CENTER = 84;
 
