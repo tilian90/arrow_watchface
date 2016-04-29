@@ -4,7 +4,7 @@
 static Window *s_main_window;
 static Layer *s_canvas_layer;
 static GPoint s_start, s_end_minute, s_end_hour;
-static TextLayer *s_time_layer;
+//static TextLayer *s_time_layer;
 static BitmapLayer *s_logo_layer;
 static GBitmap *s_logo_bitmap;
 
@@ -16,10 +16,6 @@ static const int Y_CENTER = 84;
 static void get_next_x_y(int16_t *x, int16_t *y, int corner, int radius){   
   *x = radius * cos((double)corner * (3.14/180.0)) + X_CENTER;
   *y = radius * sin((double)corner * (3.14/180.0)) + Y_CENTER;  
-}
-
-static void nothing(int x, int y){
-  
 }
 
 static void time_calc(){
@@ -40,36 +36,28 @@ static void time_calc(){
   if(tick_time->tm_hour > 12)
     corner = ((tick_time->tm_hour - 12 - 3) * 30) + (int)(tick_time->tm_min / 2);
   else
-    corner = ((tick_time->tm_hour - 3) * 30) + (int)(tick_time->tm_min / 2); 
+    corner = ((tick_time->tm_hour - 3) * 30) + (int)(tick_time->tm_min / 2);
+  //corner = -9;
+  //nothing(t_x, t_y);
   
-  //corner = tick_time->tm_hour - 3;
-  t_x = round(RADIUS_MIN * cos(corner * (3.14/180.0)) + X_CENTER);
-  t_y = round(RADIUS_MIN * sin(corner * (3.14/180.0)) + Y_CENTER);
-  
-  nothing(t_x, t_y);
-  
-  ///////////
-  char *step_count = "1234567890";
-  
-  snprintf(step_count, sizeof(step_count), "%d", t_y);
-  text_layer_set_text(s_time_layer, step_count);
-  ////////////
-  
+  /*
   s_end_minute.x = t_x;
-  s_end_minute.y = t_y;
+  s_end_minute.y = t_y;*/
   
   //s_end_hour.x = (int16_t)(RADIUS_HOUR * cos(corner * (3.14/180.0)) + X_CENTER);
   //s_end_hour.y = (int16_t)(RADIUS_HOUR * sin(corner * (3.14/180.0)) + Y_CENTER);
-  s_end_hour.x = RADIUS_MIN * cos(corner * (3.14/180.0)) + X_CENTER;
-  s_end_hour.y = RADIUS_MIN * sin(corner * (3.14/180.0)) + Y_CENTER; 
+  s_end_hour.x = RADIUS_HOUR * cos(corner * (3.14/180.0)) + X_CENTER;
+  s_end_hour.y = RADIUS_HOUR * sin(corner * (3.14/180.0)) + Y_CENTER;
+  
+  /////////// DEBUG
+  char *step_count = "1234567890";
+  
+  snprintf(step_count, sizeof(step_count), "%d", s_end_hour.x);
+  //text_layer_set_text(s_time_layer, step_count);
+  ////////////
   
   //get_next_x_y(&s_end_hour.x, &s_end_hour.y, corner, RADIUS_HOUR);
     
-  /*static char date_buffer[16];
-  strftime(date_buffer, sizeof(date_buffer), clock_is_24h_style() ?
-                                          "%H:%M:%S" : "%I:%M:%S", tick_time);
-  text_layer_set_text(s_time_layer, date_buffer);*/
-  
   layer_mark_dirty(s_canvas_layer);
 }
 
@@ -89,7 +77,7 @@ static void canvas_update_proc(Layer *layer, GContext *ctx) {
   graphics_draw_line(ctx, s_start, s_end_hour);
     
   // Redraw this as soon as possible
-  layer_mark_dirty(s_canvas_layer);
+  //layer_mark_dirty(s_canvas_layer);
   
   //timer = app_timer_register(STEP_MS, timer_callback, NULL);
 }
@@ -117,23 +105,23 @@ void window_load(Window *window){
   //timer = app_timer_register(SECOND_UNIT, timer_callback, NULL);
   
   
-  s_time_layer = text_layer_create(
+  /*s_time_layer = text_layer_create(
       GRect(0, 0, bounds.size.w, 50));
   
   text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorWhite);
   text_layer_set_text(s_time_layer, "00:00");
   text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
-  text_layer_set_text_alignment(s_time_layer, GTextAlignmentLeft);
+  text_layer_set_text_alignment(s_time_layer, GTextAlignmentLeft);*/
   
-  layer_add_child(s_canvas_layer, text_layer_get_layer(s_time_layer));
+  //layer_add_child(s_canvas_layer, text_layer_get_layer(s_time_layer));
 }
 
 void wnidow_unload(Window *window){
   layer_destroy(s_canvas_layer);
   gbitmap_destroy(s_logo_bitmap);
   bitmap_layer_destroy(s_logo_layer);
-  text_layer_destroy(s_time_layer);
+  //text_layer_destroy(s_time_layer);
 }
 
 void init(){
